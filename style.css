@@ -1,4 +1,4 @@
-/* ===== CSS Variables — Black, Red & White ===== */
+
 :root {
     --black: #0a0a0a;
     --black-soft: #111111;
@@ -936,7 +936,6 @@ body {
     line-height: 1.8;
 }
 
-/* ===== Contact ===== */
 .contact {
     background: var(--white-soft);
 }
@@ -1047,7 +1046,7 @@ body {
 
 .contact-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 16px;
     padding: 16px 20px;
     background: var(--white);
@@ -1448,7 +1447,8 @@ body {
 }
 
 .contact-item {
-    justify-content: center;
+    justify-content: flex-start;
+
 }
 
 .contact-email-action {
@@ -1830,16 +1830,8 @@ body {
 
 }
 
-/* ==========================================================
-   FINAL MOBILE FIXES
-   (kept at the very end of the file on purpose — later rules
-   win over earlier ones of equal specificity, so this block
-   guarantees these mobile styles can't get silently overridden
-   by any of the unscoped desktop rules added above)
-========================================================== */
 @media (max-width: 768px) {
 
-    /* ---- Navbar / logo: stop the name from overflowing ---- */
     .nav-container {
         flex-wrap: nowrap;
     }
@@ -1878,9 +1870,6 @@ body {
         font-size: 1rem;
     }
 
-    /* ---- Detail page two-column sections: force to a single,
-       readable column so the image isn't squeezed and cropped
-       and the text isn't left thin in a corner ---- */
     .detail-split,
     .detail-split.alt > .detail-split-inner {
         display: flex;
@@ -1931,9 +1920,7 @@ body {
         grid-template-columns: 1fr;
     }
 
-    /* ---- Contact section: keep the logo name on one readable
-       block instead of a giant nowrap line, and stop the email
-       value from stepping outside its box ---- */
+
     .contact-info {
         padding-left: 0;
     }
