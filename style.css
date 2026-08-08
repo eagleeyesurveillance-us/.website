@@ -1939,8 +1939,11 @@ body {
     }
 
     .contact-logo-img {
-        width: 160px;
-        height: 160px;
+        width: 160px !important;
+        height: 160px !important;
+        max-width: 160px;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
     }
 
     .contact-logo-name {
@@ -1981,8 +1984,10 @@ body {
     }
 
     .contact-logo-img {
-        width: 130px;
-        height: 130px;
+        width: 130px !important;
+        height: 130px !important;
+        max-width: 130px;
+        aspect-ratio: 1 / 1;
     }
 
     .contact-logo-name {
