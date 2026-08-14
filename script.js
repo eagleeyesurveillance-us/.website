@@ -1,4 +1,3 @@
-// ===== Navbar scroll effect =====
 const navbar = document.getElementById('navbar');
 const backToTop = document.getElementById('backToTop');
 
@@ -11,8 +10,6 @@ window.addEventListener('scroll', () => {
         backToTop.classList.remove('visible');
     }
 });
-
-// ===== Mobile hamburger menu =====
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('navLinks');
 
@@ -22,7 +19,6 @@ hamburger.addEventListener('click', () => {
     document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
 });
 
-// Close menu on link click
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
         hamburger.classList.remove('active');
@@ -31,7 +27,6 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
-// ===== Active nav link on scroll =====
 const sections = document.querySelectorAll('section[id]');
 const navItems = document.querySelectorAll('.nav-link');
 
@@ -51,8 +46,6 @@ window.addEventListener('scroll', () => {
         }
     });
 });
-
-// ===== Scroll reveal animations =====
 const revealElements = document.querySelectorAll('.reveal');
 
 const revealObserver = new IntersectionObserver(
@@ -71,7 +64,6 @@ const revealObserver = new IntersectionObserver(
 
 revealElements.forEach(el => revealObserver.observe(el));
 
-// ===== Animated counter for hero stats =====
 const statNumbers = document.querySelectorAll('.stat-number');
 let countersStarted = false;
 
@@ -111,12 +103,10 @@ const counterObserver = new IntersectionObserver(
 
 if (heroSection) counterObserver.observe(heroSection);
 
-// ===== Back to top =====
 backToTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// ===== Smooth hover ripple on buttons =====
 document.querySelectorAll('.btn').forEach(btn => {
     btn.addEventListener('mousemove', (e) => {
         const rect = btn.getBoundingClientRect();
@@ -127,19 +117,35 @@ document.querySelectorAll('.btn').forEach(btn => {
     });
 });
 
-// ===== Gmail button click feedback =====
 const sendEmailBtn = document.getElementById('sendEmailBtn');
 
 if (sendEmailBtn) {
-    sendEmailBtn.addEventListener('click', () => {
-        sendEmailBtn.innerHTML = '<i class="fas fa-check"></i> Opening Gmail...';
+    sendEmailBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const mailtoLink = sendEmailBtn.getAttribute('href');
+        const gmailFallback = sendEmailBtn.getAttribute('data-gmail-fallback');
+
+        sendEmailBtn.innerHTML = '<i class="fas fa-check"></i> Opening your email app...';
+
+
+        let mailAppOpened = false;
+        const onBlur = () => { mailAppOpened = true; };
+        window.addEventListener('blur', onBlur);
+
+
+        window.location.href = mailtoLink;
+
         setTimeout(() => {
+            window.removeEventListener('blur', onBlur);
+            if (!mailAppOpened && gmailFallback) {
+                window.open(gmailFallback, '_blank', 'noopener,noreferrer');
+            }
             sendEmailBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Email via Gmail';
-        }, 3000);
+        }, 1000);
     });
 }
 
-// ===== Parallax effect on hero orbs =====
 document.addEventListener('mousemove', (e) => {
     const orbs = document.querySelectorAll('.orb');
     const x = (e.clientX / window.innerWidth - 0.5) * 20;
@@ -151,7 +157,6 @@ document.addEventListener('mousemove', (e) => {
     });
 });
 
-// ===== Card tilt effect on hover =====
 document.querySelectorAll('.card, .about-card, .feature-item').forEach(card => {
     card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
